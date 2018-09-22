@@ -9,15 +9,14 @@
 #include <iostream>
 #include<fstream>
 #include<sstream>
+#include "Shader.h"
 
 //cube
-GLint cubeshader;
+
 GLuint cubeVBO;
 GLuint cubeVAO;
 GLuint cubeIBO;
 GLuint cubeTexture;
-GLint cubevertexshader;
-GLint cubefragmentshader;
 GLint uniform_cubeModel;
 GLint uniform_cubeView;
 GLint uniform_cubeProjection;

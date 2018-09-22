@@ -1,6 +1,6 @@
 #include"Shader.h"
-namespace Renderer
-{
+
+
 	Shader::Shader(const GLchar* vertexShaderfile, const GLchar* fragmentShaderfile)
 	{
 		handle = glCreateProgram();
@@ -84,4 +84,3 @@ namespace Renderer
 			std::cout << "Error compiling fragment shader" << std::endl << error << std::endl;
 		}		
 	}
-}
