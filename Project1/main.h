@@ -12,7 +12,7 @@
 #include "Shader.h"
 
 //cube
-
+Shader* cubeshader;
 GLuint cubeVBO;
 GLuint cubeVAO;
 GLuint cubeIBO;
@@ -24,12 +24,10 @@ GLint uniform_cubetexture;
 GLint attribute_cube;
 GLint attribute_cube_texcoords;
 //skybox
-GLint skyboxshader;
+Shader* skyboxshader;
 GLuint skyboxVBO;
 GLuint skyboxVAO;
 GLuint skyboxTexture;
-GLint skyboxvertexshader;
-GLint skyboxfragmentshader;
 GLint uniform_skyboxView;
 GLint uniform_skyboxProjection;
 GLint uniform_skyboxtexture;

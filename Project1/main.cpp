@@ -47,41 +47,22 @@ void Error_Callback(int n, const char * error)
 void initProgram()
 {
 	//cube shader
-	cubeshader = glCreateProgram();
-	LoadShader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\cube.vert", GL_VERTEX_SHADER, cubeshader, &cubevertexshader);
-	LoadShader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\cube.frag", GL_FRAGMENT_SHADER, cubeshader, &cubefragmentshader);
-	glLinkProgram(cubeshader);
-	GLint sucess;
-	GLchar error[512];
-	glGetProgramiv(cubeshader, GL_LINK_STATUS, &sucess);
-	if (!sucess)
-	{
-		glGetProgramInfoLog(cubeshader, 512, NULL, error);
-		std::cout << "Error linking cube shader" << std::endl << error << std::endl;
-	}
+	cubeshader = new Shader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\cube.vert",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\cube.frag");
 	//skybox shader
-	skyboxshader = glCreateProgram();
-	LoadShader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\skybox.vert", GL_VERTEX_SHADER, skyboxshader, &skyboxvertexshader);
-	LoadShader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\skybox.frag", GL_FRAGMENT_SHADER, skyboxshader, &skyboxfragmentshader);
-	glLinkProgram(skyboxshader);
-	sucess = 0;
-	glGetProgramiv(skyboxshader, GL_LINK_STATUS, &sucess);
-	if (!sucess)
-	{
-		glGetProgramInfoLog(skyboxshader, 512, NULL, error);
-		std::cout << "Error linkning skybox shader" << std::endl << error << std::endl;
-	}
+	skyboxshader = new Shader("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\skybox.vert",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\skybox.frag");
 	//get attributes and uniforms
-	attribute_cube = glGetAttribLocation(cubeshader, "position");
-	attribute_cube_texcoords = glGetAttribLocation(cubeshader, "texcoords");
-	attribute_skybox = glGetAttribLocation(skyboxshader, "position");
-	uniform_cubeModel = glGetUniformLocation(cubeshader, "model");
-	uniform_cubeView = glGetUniformLocation(cubeshader, "view");
-	uniform_cubeProjection = glGetUniformLocation(cubeshader, "projection");
-	uniform_cubetexture = glGetUniformLocation(cubeshader, "cubetexture");
-	uniform_skyboxView = glGetUniformLocation(skyboxshader, "view");
-	uniform_skyboxProjection = glGetUniformLocation(skyboxshader, "projection");
-	uniform_skyboxtexture = glGetUniformLocation(skyboxshader, "skybox");
+	attribute_cube = cubeshader->GetAttributeHandle("position");
+	attribute_cube_texcoords = cubeshader->GetAttributeHandle("texcoords");
+	attribute_skybox = skyboxshader->GetAttributeHandle("position");
+	uniform_cubeModel = cubeshader->GetUniformHandle("model");
+	uniform_cubeView = cubeshader->GetUniformHandle("view");
+	uniform_cubeProjection = cubeshader->GetUniformHandle("projection");
+	uniform_cubetexture = cubeshader->GetUniformHandle("cubetexture");
+	uniform_skyboxView = skyboxshader->GetUniformHandle("view");
+	uniform_skyboxProjection = skyboxshader->GetUniformHandle("projection");
+	uniform_skyboxtexture = skyboxshader->GetUniformHandle("skybox");
 	if (attribute_cube == -1 || attribute_cube_texcoords == -1 || attribute_skybox == -1 || uniform_cubeModel == -1 || uniform_cubeProjection == -1 ||
 		uniform_cubetexture == -1 || uniform_cubeView == -1 || uniform_skyboxProjection == -1 || uniform_skyboxtexture == -1 || uniform_skyboxView == -1)
 	{
@@ -345,7 +326,7 @@ void RenderFrame()
 	glEnable(GL_DEPTH_TEST);
 	//draw cube
 	glDepthFunc(GL_LESS);
-	glUseProgram(cubeshader);
+	cubeshader->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, cubeTexture);
 	glUniform1i(uniform_cubetexture, 0);
@@ -358,7 +339,7 @@ void RenderFrame()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	//draw sky box
 	glDepthFunc(GL_LEQUAL);
-	glUseProgram(skyboxshader);
+	skyboxshader->Use();
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
 	glUniform1i(uniform_skyboxtexture, 1);
