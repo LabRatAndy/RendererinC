@@ -60,27 +60,28 @@
 		{
 			vertexShader = glCreateShader(shadertype);
 			glShaderSource(vertexShader, 1, &sourcecode, NULL);
+			glCompileShader(vertexShader);
+			GLint sucess;
+			GLchar error[512];
+			glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &sucess);
+			if (!sucess)
+			{
+				glGetShaderInfoLog(vertexShader, 512, NULL, error);
+				std::cout << "Error compiling vertex shader" << std::endl << error << std::endl;
+			}
 		}
 		if (shadertype == GL_FRAGMENT_SHADER)
 		{
 			fragmentShader = glCreateShader(shadertype);
 			glShaderSource(fragmentShader, 1, &sourcecode, NULL);
-		}
-		glCompileShader(vertexShader);
-		GLint sucess;
-		GLchar error[512];
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &sucess);
-		if (!sucess)
-		{
-			glGetShaderInfoLog(vertexShader, 512, NULL, error);
-			std::cout << "Error compiling vertex shader" << std::endl << error << std::endl;
-		}
-		glCompileShader(fragmentShader);
-		sucess = 0;
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &sucess);
-		if (!sucess)
-		{
-			glGetShaderInfoLog(fragmentShader, 512, NULL, error);
-			std::cout << "Error compiling fragment shader" << std::endl << error << std::endl;
+			glCompileShader(fragmentShader);
+			GLint sucess;
+			GLchar error[512];
+			glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &sucess);
+			if (!sucess)
+			{
+				glGetShaderInfoLog(fragmentShader, 512, NULL, error);
+				std::cout << "Error compiling fragment shader" << std::endl << error << std::endl;
+			}
 		}		
 	}
