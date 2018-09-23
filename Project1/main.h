@@ -9,15 +9,14 @@
 #include <iostream>
 #include<fstream>
 #include<sstream>
+#include "Shader.h"
 
 //cube
-GLint cubeshader;
+Shader* cubeshader;
 GLuint cubeVBO;
 GLuint cubeVAO;
 GLuint cubeIBO;
 GLuint cubeTexture;
-GLint cubevertexshader;
-GLint cubefragmentshader;
 GLint uniform_cubeModel;
 GLint uniform_cubeView;
 GLint uniform_cubeProjection;
@@ -25,12 +24,10 @@ GLint uniform_cubetexture;
 GLint attribute_cube;
 GLint attribute_cube_texcoords;
 //skybox
-GLint skyboxshader;
+Shader* skyboxshader;
 GLuint skyboxVBO;
 GLuint skyboxVAO;
 GLuint skyboxTexture;
-GLint skyboxvertexshader;
-GLint skyboxfragmentshader;
 GLint uniform_skyboxView;
 GLint uniform_skyboxProjection;
 GLint uniform_skyboxtexture;
