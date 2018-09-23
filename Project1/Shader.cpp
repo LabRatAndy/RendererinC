@@ -38,7 +38,7 @@
 	{
 		return glGetUniformLocation(handle, name);
 	}
-	void Shader::LoadShader(const GLchar * filename, int shadertype)
+	void Shader::LoadShader(const GLchar * filename, GLint shadertype)
 	{
 		std::string shadercode;
 		std::ifstream shaderfile;

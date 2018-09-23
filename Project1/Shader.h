@@ -18,5 +18,5 @@ private:
 	GLuint handle;
 	GLuint vertexShader;
 	GLuint fragmentShader;
-	void LoadShader(const GLchar* filename, int shadertype);
+	void LoadShader(const GLchar* filename, GLint shadertype);
 };
