@@ -115,43 +115,6 @@ void initProgram()
 	view = glm::mat4(1.0f);
 
 }
-void LoadShader(const GLchar* filename, int Shadertype, GLint program, GLint* shader)
-{
-	FILE* fp;
-	errno_t err;
-	err = fopen_s(&fp,filename, "r");
-	if (fp == NULL)
-	{
-		std::cout << "file not opned error code " << err << std::endl;
-		return;
-	}
-	fseek(fp, 0, SEEK_END);
-	long length = ftell(fp);
-	GLchar* source = (GLchar*)malloc(length + 1);
-	fseek(fp, 0, SEEK_SET);
-	long n = 0;
-	while (!feof(fp))
-	{
-		source[n] = fgetc(fp);
-		n++;
-	}
-	fclose(fp);
-	source[n] = '\0';
-	*shader = glCreateShader(Shadertype);
-	glShaderSource(*shader, 1, &source, NULL);
-	glCompileShader(*shader);
-	GLint sucess;
-	GLchar error[512];
-	glGetShaderiv(*shader, GL_COMPILE_STATUS, &sucess);
-	if (!sucess)
-	{
-		glGetShaderInfoLog(*shader, 512, NULL, error);
-		std::cout << "Shader compile error" << std::endl << error << std::endl;
-	}
-	glAttachShader(program, *shader);
-
-
-}
 
 void LoadTexture(const GLchar * filename, GLuint * textureindex)
 {
