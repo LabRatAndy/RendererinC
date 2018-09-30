@@ -298,7 +298,7 @@ void RenderFrame()
 	//draw cube
 	glDepthFunc(GL_LESS);
 	cubeshader->Use();
-	glActiveTexture(GL_TEXTURE0);
+	cubeTexture->Activate(GL_TEXTURE0);
 	cubeTexture->Bind();
 	glUniform1i(uniform_cubetexture, 0);
 	glUniformMatrix4fv(uniform_cubeModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -311,7 +311,7 @@ void RenderFrame()
 	//draw sky box
 	glDepthFunc(GL_LEQUAL);
 	skyboxshader->Use();
-	glActiveTexture(GL_TEXTURE1);
+	skyboxTexture->Activate(GL_TEXTURE1);
 	skyboxTexture->Bind();
 	glUniform1i(uniform_skyboxtexture, 1);
 	glUniformMatrix4fv(uniform_skyboxView, 1, GL_FALSE, glm::value_ptr(skyboxview));
