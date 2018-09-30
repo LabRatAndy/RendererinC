@@ -68,6 +68,11 @@ void Texture::Unbind()
 	}
 }
 
+void Texture::Activate(GLenum textureunit)
+{
+	glActiveTexture(textureunit);
+}
+
 GLboolean Texture::IsCubeMapped()
 {
 	return Cubemapped;

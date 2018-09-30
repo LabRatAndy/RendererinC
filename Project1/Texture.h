@@ -17,6 +17,7 @@ public:
 	~Texture();
 	void Bind();
 	void Unbind();
+	void Activate(GLenum textureunit);
 	GLboolean IsCubeMapped();
 	void SetTexParameterI(GLenum parametername, GLint parameter);
 };
