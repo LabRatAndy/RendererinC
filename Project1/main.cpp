@@ -97,16 +97,24 @@ void initProgram()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
+	//cube texture
+	cubeTexture = new Texture("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\Container2.png");
+	cubeTexture->SetTexParameterI(GL_TEXTURE_WRAP_S, GL_REPEAT);
+	cubeTexture->SetTexParameterI(GL_TEXTURE_WRAP_T, GL_REPEAT);
+	cubeTexture->SetTexParameterI(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	cubeTexture->SetTexParameterI(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	//skybox texture
-	std::string filenames[6];
-	filenames[0] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\top.png";
-	filenames[1] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\bottom.png";
-	filenames[2] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\left.png";
-	filenames[3] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\right.png";
-	filenames[4] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\front.png";
-	filenames[5] = "C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\back.png";
-	LoadSkyBoxTexture(filenames, &skyboxTexture);
-	LoadTexture("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\Container2.png", &cubeTexture);
+	skyboxTexture = new Texture("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\top.png",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\bottom.png",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\left.png",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\right.png",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\front.png",
+		"C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\back.png");
+	skyboxTexture->SetTexParameterI(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	skyboxTexture->SetTexParameterI(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	skyboxTexture->SetTexParameterI(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	skyboxTexture->SetTexParameterI(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	skyboxTexture->SetTexParameterI(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glClearColor(0.5f, 0.1f, 0.5f, 1.0f);
 	camerapos = glm::vec3(-7.0f, 7.0f, -7.0f);
 	lookatpos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -114,62 +122,6 @@ void initProgram()
 	skyboxview = glm::mat4(1.0f);
 	view = glm::mat4(1.0f);
 
-}
-
-void LoadTexture(const GLchar * filename, GLuint * textureindex)
-{
-	glGenTextures(1, textureindex);
-	glBindTexture(GL_TEXTURE_2D, *textureindex);
-	int width, height;
-	unsigned char* texture = SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void LoadSkyBoxTexture(const std::string* filenames, GLuint * SkyboxIndex)
-{
-	glGenTextures(1, SkyboxIndex);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, *SkyboxIndex);
-	int width, height;
-	unsigned char* texture;
-	for (int n = 0; n < 6; n++)
-	{
-		texture = SOIL_load_image(filenames[n].c_str(), &width, &height,0, SOIL_LOAD_RGB);
-		switch (n)
-		{
-			case 0:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 1:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 2:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 3:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 4:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 5:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;	
-		}
-		SOIL_free_image_data(texture);
-	}
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 void CreateCube(float size, GLfloat* cube)
@@ -290,8 +242,8 @@ void RenderFrame()
 	//draw cube
 	glDepthFunc(GL_LESS);
 	cubeshader->Use();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, cubeTexture);
+	cubeTexture->Activate(GL_TEXTURE0);
+	cubeTexture->Bind();
 	glUniform1i(uniform_cubetexture, 0);
 	glUniformMatrix4fv(uniform_cubeModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniform_cubeView, 1, GL_FALSE, glm::value_ptr(view));
@@ -299,17 +251,17 @@ void RenderFrame()
 	glBindVertexArray(cubeVAO);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	cubeTexture->Unbind();
 	//draw sky box
 	glDepthFunc(GL_LEQUAL);
 	skyboxshader->Use();
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+	skyboxTexture->Activate(GL_TEXTURE1);
+	skyboxTexture->Bind();
 	glUniform1i(uniform_skyboxtexture, 1);
 	glUniformMatrix4fv(uniform_skyboxView, 1, GL_FALSE, glm::value_ptr(skyboxview));
 	glUniformMatrix4fv(uniform_skyboxProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	glBindVertexArray(skyboxVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	skyboxTexture->Unbind();
 }

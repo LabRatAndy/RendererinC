@@ -10,13 +10,14 @@
 #include<fstream>
 #include<sstream>
 #include "Shader.h"
+#include "Texture.h"
 
 //cube
 Shader* cubeshader;
 GLuint cubeVBO;
 GLuint cubeVAO;
 GLuint cubeIBO;
-GLuint cubeTexture;
+Texture* cubeTexture;
 GLint uniform_cubeModel;
 GLint uniform_cubeView;
 GLint uniform_cubeProjection;
@@ -27,7 +28,7 @@ GLint attribute_cube_texcoords;
 Shader* skyboxshader;
 GLuint skyboxVBO;
 GLuint skyboxVAO;
-GLuint skyboxTexture;
+Texture* skyboxTexture;
 GLint uniform_skyboxView;
 GLint uniform_skyboxProjection;
 GLint uniform_skyboxtexture;
@@ -43,9 +44,6 @@ glm::mat4 projection;
 void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void Error_Callback(int n, const char* error);
 void initProgram();
-void LoadShader(const GLchar* filename, int Shadertype, GLint program, GLint* shader);
-void LoadTexture(const GLchar* filename, GLuint* textureindex);
-void LoadSkyBoxTexture(const std::string* filenames, GLuint* SkyboxIndex);
 void  CreateCube(float size, GLfloat* cube);
 void  CreateEBO(GLint* cube);
 void  CreateSkyBoxCube(float size, GLfloat* skybox);
