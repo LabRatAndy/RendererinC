@@ -124,62 +124,6 @@ void initProgram()
 
 }
 
-void LoadTexture(const GLchar * filename, GLuint * textureindex)
-{
-	glGenTextures(1, textureindex);
-	glBindTexture(GL_TEXTURE_2D, *textureindex);
-	int width, height;
-	unsigned char* texture = SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void LoadSkyBoxTexture(const std::string* filenames, GLuint * SkyboxIndex)
-{
-	glGenTextures(1, SkyboxIndex);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, *SkyboxIndex);
-	int width, height;
-	unsigned char* texture;
-	for (int n = 0; n < 6; n++)
-	{
-		texture = SOIL_load_image(filenames[n].c_str(), &width, &height,0, SOIL_LOAD_RGB);
-		switch (n)
-		{
-			case 0:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 1:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 2:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 3:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 4:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;
-			case 5:
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-				break;	
-		}
-		SOIL_free_image_data(texture);
-	}
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-}
-
 void CreateCube(float size, GLfloat* cube)
 {
 	GLfloat thecube[] =
