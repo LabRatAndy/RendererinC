@@ -246,7 +246,7 @@ void RenderFrame()
 	glUniformMatrix4fv(uniform_cubeView, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(uniform_cubeProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	glBindVertexArray(cubeVAO);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	cubeIBO->Draw();
 	glBindVertexArray(0);
 	cubeTexture->Unbind();
 	//draw sky box
@@ -258,7 +258,7 @@ void RenderFrame()
 	glUniformMatrix4fv(uniform_skyboxView, 1, GL_FALSE, glm::value_ptr(skyboxview));
 	glUniformMatrix4fv(uniform_skyboxProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	glBindVertexArray(skyboxVAO);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	skyboxVBO->Draw(0, 36);
 	glBindVertexArray(0);
 	skyboxTexture->Unbind();
 }
