@@ -17,7 +17,6 @@ void VertexBufferObject::BufferData(GLenum DrawType)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, DrawType);
 	delete vertexData;
 	vertexData = nullptr;
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void VertexBufferObject::UnBind(void)

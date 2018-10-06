@@ -9,7 +9,7 @@ class ElementBufferObject
 {
 private:
 	GLuint handle;
-	GLint* ibo;
+	GLint* ibo = nullptr;
 public:
 	ElementBufferObject(GLint* ibo);
 	~ElementBufferObject();
