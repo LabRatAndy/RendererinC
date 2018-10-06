@@ -9,7 +9,7 @@ class VertexBufferObject
 {
 private:
 	GLuint handle;
-	GLfloat* vertexData;
+	GLfloat* vertexData = nullptr;
 
 public:
 	VertexBufferObject(GLfloat* vertices);
