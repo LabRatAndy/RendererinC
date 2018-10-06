@@ -19,6 +19,11 @@ void VertexBufferObject::BufferData(GLenum DrawType)
 	vertexData = nullptr;
 }
 
+void VertexBufferObject::Draw(GLint first, GLint count)
+{
+	glDrawArrays(GL_TRIANGLES, first, count);
+}
+
 void VertexBufferObject::UnBind(void)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

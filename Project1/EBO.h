@@ -10,10 +10,12 @@ class ElementBufferObject
 private:
 	GLuint handle;
 	GLint* ibo = nullptr;
+	GLint count;
 public:
 	ElementBufferObject(GLint* ibo);
 	~ElementBufferObject();
 	void Bind(void);
 	void BufferData(GLenum drawtype);
+	void Draw(void);
 	void Unbind(void);
 };
