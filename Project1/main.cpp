@@ -69,31 +69,28 @@ void initProgram()
 		std::cout << "Error finding uniforms and attributes" << std::endl;
 	}
 	//create cube buffers
-	glGenBuffers(1, &cubeVBO);
-	glGenBuffers(1, &cubeIBO);
-	glGenVertexArrays(1, &cubeVAO);
-	glBindVertexArray(cubeVAO);
-	GLfloat cube[40]; 
-	CreateCube(0.5f,cube);
+	GLfloat cube[40];
+	CreateCube(0.5f, cube);
 	GLint ibo[36];
 	CreateEBO(ibo);
-	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), &cube, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ibo), &ibo, GL_STATIC_DRAW);
+	cubeVBO = new VertexBufferObject(cube);
+	cubeIBO = new ElementBufferObject(ibo);
+	glGenVertexArrays(1, &cubeVAO);
+	glBindVertexArray(cubeVAO);
+	cubeVBO->BufferData(GL_STATIC_DRAW);
+	cubeIBO->BufferData(GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	//create skybox buffers
-	glGenBuffers(1, &skyboxVBO);
+	GLfloat skybox[108];
+	CreateSkyBoxCube(10.0f, skybox);
+	skyboxVBO = new VertexBufferObject(skybox);
 	glGenVertexArrays(1, &skyboxVAO);
 	glBindVertexArray(skyboxVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-	GLfloat skybox[108];
-	CreateSkyBoxCube(10.0f,skybox);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skybox), &skybox, GL_STATIC_DRAW);
+	skyboxVBO->BufferData(GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
