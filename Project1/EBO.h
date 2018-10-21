@@ -12,7 +12,7 @@ private:
 	GLint* ibo = nullptr;
 	GLint count;
 public:
-	ElementBufferObject(GLint* ibo);
+	ElementBufferObject(GLint* ibo,GLint size);
 	~ElementBufferObject();
 	void Bind(void);
 	void BufferData(GLenum drawtype);

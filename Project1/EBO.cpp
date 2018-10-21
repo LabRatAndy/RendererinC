@@ -1,10 +1,10 @@
 #include "EBO.h"
 
-ElementBufferObject::ElementBufferObject(GLint * ibo)
+ElementBufferObject::ElementBufferObject(GLint * ibo,GLint size)
 {
 	glGenBuffers(1, &handle);
 	this->ibo = ibo;
-	count = sizeof(ibo);
+	count = size;
 }
 
 ElementBufferObject::~ElementBufferObject()
@@ -21,9 +21,7 @@ void ElementBufferObject::Bind(void)
 void ElementBufferObject::BufferData(GLenum drawtype)
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ibo), ibo, drawtype);
-	delete ibo;
-	ibo = nullptr;
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count, ibo, drawtype);
 }
 
 void ElementBufferObject::Draw(void)
