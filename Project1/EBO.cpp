@@ -21,7 +21,7 @@ void ElementBufferObject::Bind(void)
 void ElementBufferObject::BufferData(GLenum drawtype)
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count, ibo, drawtype);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count* sizeof(GLint), ibo, drawtype);
 }
 
 void ElementBufferObject::Draw(void)

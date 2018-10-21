@@ -74,7 +74,7 @@ void initProgram()
 	GLint ibo[36];
 	CreateEBO(ibo);
 	cubeVBO = new VertexBufferObject(cube,40);
-	cubeIBO = new ElementBufferObject(ibo);
+	cubeIBO = new ElementBufferObject(ibo,36);
 	glGenVertexArrays(1, &cubeVAO);
 	glBindVertexArray(cubeVAO);
 	cubeVBO->BufferData(GL_STATIC_DRAW);
