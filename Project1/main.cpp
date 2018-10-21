@@ -73,7 +73,7 @@ void initProgram()
 	CreateCube(0.5f, cube);
 	GLint ibo[36];
 	CreateEBO(ibo);
-	cubeVBO = new VertexBufferObject(cube);
+	cubeVBO = new VertexBufferObject(cube,40);
 	cubeIBO = new ElementBufferObject(ibo);
 	glGenVertexArrays(1, &cubeVAO);
 	glBindVertexArray(cubeVAO);
@@ -87,7 +87,7 @@ void initProgram()
 	//create skybox buffers
 	GLfloat skybox[108];
 	CreateSkyBoxCube(10.0f, skybox);
-	skyboxVBO = new VertexBufferObject(skybox);
+	skyboxVBO = new VertexBufferObject(skybox,108);
 	glGenVertexArrays(1, &skyboxVAO);
 	glBindVertexArray(skyboxVAO);
 	skyboxVBO->BufferData(GL_STATIC_DRAW);

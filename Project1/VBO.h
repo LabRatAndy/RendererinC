@@ -10,9 +10,10 @@ class VertexBufferObject
 private:
 	GLuint handle;
 	GLfloat* vertexData = nullptr;
+	GLint dataSize;
 
 public:
-	VertexBufferObject(GLfloat* vertices);
+	VertexBufferObject(GLfloat *vertices, GLint size);
 	void Bind(void);
 	void BufferData(GLenum DrawType);
 	void Draw(GLint first, GLint count);

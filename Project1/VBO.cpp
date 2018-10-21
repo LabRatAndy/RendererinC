@@ -1,9 +1,10 @@
 #include"VBO.h"
 
-VertexBufferObject::VertexBufferObject(GLfloat * vertices)
+VertexBufferObject::VertexBufferObject(GLfloat *vertices, GLint size)
 {
 	glGenBuffers(1, &handle);
 	vertexData = vertices;
+	dataSize = size;
 }
 
 void VertexBufferObject::Bind(void)
@@ -14,9 +15,7 @@ void VertexBufferObject::Bind(void)
 void VertexBufferObject::BufferData(GLenum DrawType)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, handle);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, DrawType);
-	delete vertexData;
-	vertexData = nullptr;
+	glBufferData(GL_ARRAY_BUFFER, dataSize*sizeof(GLfloat), vertexData, DrawType);
 }
 
 void VertexBufferObject::Draw(GLint first, GLint count)
