@@ -31,7 +31,7 @@ void VertexArrayObject::SetIBO(ElementBufferObject * IBO)
 	if (ibo == nullptr)ibo = IBO;
 	else
 	{
-		ibo->Unbind;
+		ibo->Unbind();
 		delete ibo;
 		ibo = IBO;
 	}
