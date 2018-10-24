@@ -11,6 +11,10 @@ Attribute::Attribute(const GLchar * Name, const GLuint Index, const GLint Size, 
 	normalised = Normalised;
 }
 
+Attribute::Attribute()
+{
+}
+
 void Attribute::SetAttribute()
 {
 	glVertexAttribPointer(index, size, type, normalised, stride, (void*)offset);

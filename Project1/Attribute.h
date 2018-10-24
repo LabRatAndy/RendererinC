@@ -17,6 +17,7 @@ private:
 	GLenum normalised;
 public:
 	Attribute(const GLchar* Name, const GLuint Index, const GLint Size, const GLint Stride, const GLint Offset, GLenum Type,GLenum Normalised);
+	Attribute();
 	void SetAttribute();
 	void EnableAttribute();
 	void DisableAttribute();
