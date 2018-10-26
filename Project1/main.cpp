@@ -69,34 +69,36 @@ void initProgram()
 		std::cout << "Error finding uniforms and attributes" << std::endl;
 	}
 	//create cube buffers
-	glGenBuffers(1, &cubeVBO);
-	glGenBuffers(1, &cubeIBO);
-	glGenVertexArrays(1, &cubeVAO);
-	glBindVertexArray(cubeVAO);
-	GLfloat cube[40]; 
-	CreateCube(0.5f,cube);
+	GLfloat cube[40];
+	CreateCube(0.5f, cube);
 	GLint ibo[36];
 	CreateEBO(ibo);
-	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cube), &cube, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ibo), &ibo, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glBindVertexArray(0);
+	cubeVBO = new VertexBufferObject(cube,40);
+	cubeIBO = new ElementBufferObject(ibo,36);
+	cubeVAO = new VertexArrayObject(2);
+	cubeVAO->Bind();
+	cubeVBO->BufferData(GL_STATIC_DRAW);
+	cubeIBO->BufferData(GL_STATIC_DRAW);
+	cubeVAO->SetVBO(cubeVBO);
+	cubeVAO->SetIBO(cubeIBO);
+	cubePosition = new Attribute("position", 0, 3, 5 * sizeof(GLfloat), 0, GL_FLOAT, GL_FALSE);
+	cubeVAO->AddAttribute(0, *cubePosition);
+	cubeTexcoords = new Attribute("texcoords", 1, 2, 5 * sizeof(GLfloat), 3 * sizeof(GLfloat), GL_FLOAT, GL_FALSE);
+	cubeVAO->AddAttribute(1, *cubeTexcoords);
+	cubeVAO->SetAttributes();
+	cubeVAO->Unbind();
 	//create skybox buffers
-	glGenBuffers(1, &skyboxVBO);
-	glGenVertexArrays(1, &skyboxVAO);
-	glBindVertexArray(skyboxVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
 	GLfloat skybox[108];
-	CreateSkyBoxCube(10.0f,skybox);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skybox), &skybox, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
+	CreateSkyBoxCube(10.0f, skybox);
+	skyboxVBO = new VertexBufferObject(skybox,108);
+	skyboxVAO = new VertexArrayObject(1);
+	skyboxVAO->Bind();
+	skyboxVBO->BufferData(GL_STATIC_DRAW);
+	skyboxVAO->SetVBO(skyboxVBO);
+	skyboxPosition = new Attribute("position", 0, 3, 3 * sizeof(GLfloat), 0, GL_FLOAT, GL_FALSE);
+	skyboxVAO->AddAttribute(0, *skyboxPosition);
+	skyboxVAO->SetAttributes();
+	skyboxVAO->Unbind();
 	//cube texture
 	cubeTexture = new Texture("C:\\Users\\me\\Documents\\Visual Studio 2015\\Projects\\Project1\\Debug\\Container2.png");
 	cubeTexture->SetTexParameterI(GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -248,9 +250,9 @@ void RenderFrame()
 	glUniformMatrix4fv(uniform_cubeModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniform_cubeView, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(uniform_cubeProjection, 1, GL_FALSE, glm::value_ptr(projection));
-	glBindVertexArray(cubeVAO);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
+	cubeVAO->Bind();
+	cubeVAO->Draw();
+	cubeVAO->Unbind();
 	cubeTexture->Unbind();
 	//draw sky box
 	glDepthFunc(GL_LEQUAL);
@@ -260,8 +262,8 @@ void RenderFrame()
 	glUniform1i(uniform_skyboxtexture, 1);
 	glUniformMatrix4fv(uniform_skyboxView, 1, GL_FALSE, glm::value_ptr(skyboxview));
 	glUniformMatrix4fv(uniform_skyboxProjection, 1, GL_FALSE, glm::value_ptr(projection));
-	glBindVertexArray(skyboxVAO);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
+	skyboxVAO->Bind();
+	skyboxVAO->Draw(0, 36);
+	skyboxVAO->Unbind();
 	skyboxTexture->Unbind();
 }
