@@ -13,13 +13,16 @@
 #include "Texture.h"
 #include "VBO.h"
 #include "EBO.h"
+#include "VAO.h"
 
 //cube
 Shader* cubeshader;
 VertexBufferObject* cubeVBO;
-GLuint cubeVAO;
+VertexArrayObject* cubeVAO;
 ElementBufferObject* cubeIBO;
 Texture* cubeTexture;
+Attribute* cubePosition;
+Attribute* cubeTexcoords;
 GLint uniform_cubeModel;
 GLint uniform_cubeView;
 GLint uniform_cubeProjection;
@@ -29,8 +32,9 @@ GLint attribute_cube_texcoords;
 //skybox
 Shader* skyboxshader;
 VertexBufferObject* skyboxVBO;
-GLuint skyboxVAO;
+VertexArrayObject* skyboxVAO;
 Texture* skyboxTexture;
+Attribute* skyboxPosition;
 GLint uniform_skyboxView;
 GLint uniform_skyboxProjection;
 GLint uniform_skyboxtexture;
