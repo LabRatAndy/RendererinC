@@ -23,11 +23,16 @@ int main()
 	}
 	glfwSetKeyCallback(window, Key_Callback);
 	glfwSetErrorCallback(Error_Callback);
+	glfwSetCursorPosCallback(window, MouseCallback);
 	glViewport(0, 0, 800, 600);
 	initProgram();
 	while (!glfwWindowShouldClose(window))
 	{
+		GLfloat currentFrame = glfwGetTime();
+		deltaTime = lastTime - currentFrame;
+		lastTime = currentFrame;
 		glfwPollEvents();
+		DoMovement();
 		UpdateFrame();
 		RenderFrame();
 		glfwSwapBuffers(window);
@@ -39,6 +44,50 @@ int main()
 void Key_Callback(GLFWwindow * window, int key, int scancode, int action, int mode)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) glfwSetWindowShouldClose(window, GL_TRUE);
+	if (key > 0 && key < 1024)
+	{
+		if (action == GLFW_PRESS)
+		{
+			keys[key] = true;
+		}
+		if (action == GLFW_RELEASE)
+		{
+			keys[key] = false;
+		}
+	}
+}
+void MouseCallback(GLFWwindow * window, double xPos, double yPos)
+{
+	if (firstMouse)
+	{
+		lastX = xPos;
+		lastY = yPos;
+		firstMouse = false;
+	}
+	GLfloat xOffset = xPos - lastX;
+	GLfloat yOffset = lastY - yPos;
+	lastX = xPos;
+	lastY = yPos;
+	camera->ProcessMouseMovement(xOffset, yOffset);
+}
+void DoMovement(void)
+{
+	if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
+	{
+		camera->ProcessKeyboard(Forward, deltaTime);
+	}
+	if (keys[GLFW_KEY_A] || keys[GLFW_KEY_LEFT])
+	{
+		camera->ProcessKeyboard(Left, deltaTime);
+	}
+	if (keys[GLFW_KEY_S] || keys[GLFW_KEY_DOWN])
+	{
+		camera->ProcessKeyboard(Backward, deltaTime);
+	}
+	if (keys[GLFW_KEY_D] || keys[GLFW_KEY_RIGHT)
+	{
+		camera->ProcessKeyboard(Right, deltaTime);
+	}
 }
 void Error_Callback(int n, const char * error)
 {

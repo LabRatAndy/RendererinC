@@ -14,6 +14,7 @@
 #include "VBO.h"
 #include "EBO.h"
 #include "VAO.h"
+#include "Camera.h"
 
 //cube
 Shader* cubeshader;
@@ -46,8 +47,19 @@ glm::mat4 view;
 glm::mat4 skyboxview;
 glm::mat4 projection;
 
+//camera
+Camera* camera;
+bool keys[1024];
+GLfloat lastX = 400;
+GLfloat lastY = 300;
+bool firstMouse = true;
+GLfloat deltaTime = 0.0f;
+GLfloat lastTime = 0.0f;
+
 
 void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void MouseCallback(GLFWwindow* window, double xPos, double yPos);
+void DoMovement(void);
 void Error_Callback(int n, const char* error);
 void initProgram();
 void  CreateCube(float size, GLfloat* cube);
