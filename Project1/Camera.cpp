@@ -30,19 +30,19 @@ void Camera::ProcessKeyboard(camera_movement direction, GLfloat deltaTime)
 	GLfloat velocity = movementSpeed * deltaTime;
 	if (direction == Forward)
 	{
-		positiion += front * velocity;
+		positiion -= front * velocity;
 	}
 	if (direction == Backward)
 	{
-		positiion -= front * velocity;
+		positiion += front * velocity;
 	}
 	if (direction == Left)
 	{
-		positiion -= right * velocity;
+		positiion += right * velocity;
 	}
 	if (direction == Right)
 	{
-		positiion += right * velocity;
+		positiion -= right * velocity;
 	}
 }
 
