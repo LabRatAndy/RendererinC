@@ -281,7 +281,7 @@ void UpdateFrame()
 	model = glm::rotate(model, -55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	view = camera->GetViewMatrix();
 	projection = glm::perspective(90.0f, (float)(800 / 600), 0.1f, 100.0f);
-	skyboxview = camera->GetViewMatrix();
+	skyboxview = glm::mat4(glm::mat3(camera->GetViewMatrix()));
 }
 
 void RenderFrame()
