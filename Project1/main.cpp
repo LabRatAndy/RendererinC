@@ -168,8 +168,6 @@ void initProgram()
 	skyboxTexture->SetTexParameterI(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glClearColor(0.5f, 0.1f, 0.5f, 1.0f);
 	camera = new Camera(glm::vec3(-7.0f, 7.0f, -7.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	//camerapos = glm::vec3(-7.0f, 7.0f, -7.0f);
-	//lookatpos = glm::vec3(0.0f, 0.0f, 0.0f);
 	model = glm::mat4(1.0f);
 	skyboxview = glm::mat4(1.0f);
 	view = glm::mat4(1.0f);
@@ -281,10 +279,8 @@ void CreateSkyBoxCube(float size, GLfloat* skybox)
 void UpdateFrame()
 {
 	model = glm::rotate(model, -55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	//view = glm::lookAt(camerapos, lookatpos, glm::vec3(0.0, 1.0, 0.0));
 	view = camera->GetViewMatrix();
 	projection = glm::perspective(90.0f, (float)(800 / 600), 0.1f, 100.0f);
-	//skyboxview = glm::lookAt(camerapos, lookatpos, glm::vec3(0.0f, 1.0f, 0.0f));
 	skyboxview = camera->GetViewMatrix();
 }
 
