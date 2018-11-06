@@ -70,7 +70,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLEW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLFW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\glm;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\SOIL;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\me\Source\Repos\opengl stuff\lib-vc2015;C:\Users\me\Source\Repos\opengl stuff\lib\Release\Win32;C:\Users\me\Source\Repos\opengl stuff\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\Libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
