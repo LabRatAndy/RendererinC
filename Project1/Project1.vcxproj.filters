@@ -71,5 +71,20 @@
     <ClInclude Include="VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="glm\glm.hpp">
+      <Filter>GLM</Filter>
+    </ClInclude>
+    <ClInclude Include="glm\gtc\matrix_transform.hpp">
+      <Filter>GLM</Filter>
+    </ClInclude>
+    <ClInclude Include="glm\gtc\type_ptr.hpp">
+      <Filter>GLM</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFW\glfw3.h">
+      <Filter>GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="GLEW\glew.h">
+      <Filter>GLEW</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
