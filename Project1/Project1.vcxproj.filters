@@ -22,6 +22,9 @@
     <Filter Include="GLM">
       <UniqueIdentifier>{33efb835-de09-43a5-a0ea-0c86cbd97c02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SOIL">
+      <UniqueIdentifier>{7b8af124-c79f-4c48-b74b-962db070945e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
