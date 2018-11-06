@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\me\Source\Repos\opengl stuff\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLEW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLFW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\glm;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\SOIL;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\me\Source\Repos\opengl stuff\lib-vc2015;C:\Users\me\Source\Repos\opengl stuff\lib\Release\Win32;C:\Users\me\Source\Repos\opengl stuff\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -135,6 +135,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SOIL\SOIL.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />

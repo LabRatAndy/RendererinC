@@ -89,5 +89,8 @@
     <ClInclude Include="GLEW\glew.h">
       <Filter>GLEW</Filter>
     </ClInclude>
+    <ClInclude Include="SOIL\SOIL.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
 #pragma once
 #define GLEW_STATIC
-#include <GL\glew.h>
-#include<GLFW\glfw3.h>
-#include<glm-0.9.9.0\glm\glm.hpp>
-#include<glm-0.9.9.0\glm\gtc\matrix_transform.hpp>
-#include<glm-0.9.9.0\glm\gtc\type_ptr.hpp>
-#include<src\SOIL.h>
+#include<glew.h>
+#include<glfw3.h>
+#include<glm.hpp>
+#include<gtc\matrix_transform.hpp>
+#include<gtc\type_ptr.hpp>
+#include<SOIL.h>
 #include <iostream>
 #include<fstream>
 #include<sstream>
