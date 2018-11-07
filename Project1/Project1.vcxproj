@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLEW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\GLFW;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\glm;C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\SOIL;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\me\Documents\Visual Studio 2015\Projects\Project1\Project1\Libraries;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)/SOIL;$(ProjectDir)/GLEW;$(ProjectDir)/GLFW;$(ProjectDir)/glm;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)/Libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
