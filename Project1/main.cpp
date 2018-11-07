@@ -28,7 +28,7 @@ int main()
 	initProgram();
 	while (!glfwWindowShouldClose(window))
 	{
-		GLfloat currentFrame = glfwGetTime();
+		GLdouble currentFrame = glfwGetTime();
 		deltaTime = lastTime - currentFrame;
 		lastTime = currentFrame;
 		glfwPollEvents();

@@ -53,8 +53,9 @@ bool keys[1024];
 GLfloat lastX = 400;
 GLfloat lastY = 300;
 bool firstMouse = true;
-GLfloat deltaTime = 0.0f;
-GLfloat lastTime = 0.0f;
+GLdouble deltaTime = 0.0f;
+GLdouble lastTime = 0.0f;
+
 
 
 void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mode);
