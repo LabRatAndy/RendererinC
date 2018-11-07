@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\me\Source\Repos\opengl stuff\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\me\Source\Repos\opengl stuff\lib-vc2015;C:\Users\me\Source\Repos\opengl stuff\lib\Release\Win32;C:\Users\me\Source\Repos\opengl stuff\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\SOIL\;$(ProjectDir)\GLEW\;$(ProjectDir)\GLFW\;$(ProjectDir)\glm\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libraries\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -129,12 +129,28 @@
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="GLEW\glew.h" />
+    <ClInclude Include="GLFW\glfw3.h" />
+    <ClInclude Include="glm\glm.hpp" />
+    <ClInclude Include="glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="glm\gtc\type_ptr.hpp" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SOIL\SOIL.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Libraries\glew32.lib" />
+    <Library Include="Libraries\glew32s.lib" />
+    <Library Include="Libraries\glfw3.lib" />
+    <Library Include="Libraries\glfw3dll.lib" />
+    <Library Include="Libraries\SOIL.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libraries\glfw3.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

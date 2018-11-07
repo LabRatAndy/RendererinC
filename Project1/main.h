@@ -1,11 +1,11 @@
 #pragma once
 #define GLEW_STATIC
-#include <GL\glew.h>
-#include<GLFW\glfw3.h>
-#include<glm-0.9.9.0\glm\glm.hpp>
-#include<glm-0.9.9.0\glm\gtc\matrix_transform.hpp>
-#include<glm-0.9.9.0\glm\gtc\type_ptr.hpp>
-#include<src\SOIL.h>
+#include<glew.h>
+#include<glfw3.h>
+#include<glm.hpp>
+#include<gtc\matrix_transform.hpp>
+#include<gtc\type_ptr.hpp>
+#include<SOIL.h>
 #include <iostream>
 #include<fstream>
 #include<sstream>
@@ -53,8 +53,9 @@ bool keys[1024];
 GLfloat lastX = 400;
 GLfloat lastY = 300;
 bool firstMouse = true;
-GLfloat deltaTime = 0.0f;
-GLfloat lastTime = 0.0f;
+GLdouble deltaTime = 0.0f;
+GLdouble lastTime = 0.0f;
+
 
 
 void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mode);

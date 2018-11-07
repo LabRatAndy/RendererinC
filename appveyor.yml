@@ -1,3 +1,8 @@
+image:
+- Visual Studio 2015
 version: 1.0.{build}
+configuration: Debug
+platform: x86
 build:
+  project: Project1.sln
   verbosity: minimal

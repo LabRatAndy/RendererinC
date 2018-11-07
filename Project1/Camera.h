@@ -2,11 +2,11 @@
 #ifndef GLEW_STATIC
 #define GLEW_STATIC
 #endif
-#include <GL\glew.h>
-#include<GLFW\glfw3.h>
-#include<glm-0.9.9.0\glm\glm.hpp>
-#include<glm-0.9.9.0\glm\gtc\matrix_transform.hpp>
-#include<glm-0.9.9.0\glm\gtc\type_ptr.hpp>
+#include <glew.h>
+#include<glfw3.h>
+#include<glm.hpp>
+#include<gtc\matrix_transform.hpp>
+#include<gtc\type_ptr.hpp>
 
 enum camera_movement
 {
@@ -38,7 +38,7 @@ private:
 public:
 	Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw = YAW, GLfloat pitch = PITCH);
 	glm::mat4 GetViewMatrix(void);
-	void ProcessKeyboard(camera_movement direction, GLfloat deltaTime);
+	void ProcessKeyboard(camera_movement direction, GLdouble deltaTime);
 	void ProcessMouseMovement(GLfloat xOffset, GLfloat yOffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(GLfloat yOffset);
 	GLfloat GetZoom(void);
