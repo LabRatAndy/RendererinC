@@ -2,6 +2,7 @@
 #ifndef GLEW_STATIC
 #define GLEW_STATIC
 #endif
+//#define DEBUG
 #include<glew.h>
 #include<glfw3.h>
 #include "Camera.h"
@@ -22,7 +23,7 @@ private:
 	
 public:
 	static ResourceManager& Instance(void);
-	void AddShader(Shader* shader, GLchar* shadername);
+	bool AddShader(Shader* shader, GLchar* shadername);
 	Shader* GetShader(GLchar* shadername);
 	void RemoveShader(GLchar* shadername);
 	void AddCamera(Camera* camera, GLchar* cameraname);
