@@ -26,10 +26,10 @@ public:
 	bool AddShader(Shader* shader, GLchar* shadername);
 	Shader* GetShader(GLchar* shadername);
 	void RemoveShader(GLchar* shadername);
-	void AddCamera(Camera* camera, GLchar* cameraname);
+	bool AddCamera(Camera* camera, GLchar* cameraname);
 	Camera* GetCamera(GLchar* cameraname);
 	void RemoveCamera(GLchar* cameraname);
-	void AddTexture(Texture* texture, GLchar* texturename);
+	bool AddTexture(Texture* texture, GLchar* texturename);
 	Texture* GetTexture(GLchar* texturename);
 	void RemoveTexture(GLchar* texturename);
 

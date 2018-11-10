@@ -6,7 +6,7 @@ ResourceManager::ResourceManager()
 }
 ResourceManager::~ResourceManager()
 {
-	//TODO clean up any  remaining resoruces
+	
 }
 ResourceManager & ResourceManager::Instance(void)
 {
@@ -47,28 +47,64 @@ void ResourceManager::RemoveShader(GLchar * shadername)
 	shaderDictionary.erase(shadername);
 }
 
-void ResourceManager::AddCamera(Camera * camera, GLchar * cameraname)
+bool ResourceManager::AddCamera(Camera * camera, GLchar * cameraname)
 {
+	if (camera == nullptr) return false;
+	if (cameraname == nullptr) return false;
+	if (strlen(cameraname) == 0) return false;
+	if (strcmp(cameraname, " ")) return false;
+	cameraDictionary.insert(std::pair<GLchar*, Camera*>(cameraname, camera));
+	return true;
 }
 
 Camera * ResourceManager::GetCamera(GLchar * cameraname)
 {
-	return nullptr;
+#ifdef DEBUG
+	try
+	{
+#endif
+		return cameraDictionary.at(cameraname);
+#ifdef DEBUG
+	}
+	catch (std::out_of_range e)
+	{
+		return nullptr;
+	}
+#endif
 }
 
 void ResourceManager::RemoveCamera(GLchar * cameraname)
 {
+	cameraDictionary.erase(cameraname);
 }
 
-void ResourceManager::AddTexture(Texture * texture, GLchar * texturename)
+bool ResourceManager::AddTexture(Texture * texture, GLchar * texturename)
 {
+	if (texture == nullptr) return false;
+	if (texturename == nullptr) return false;
+	if (strlen(texturename) == 0) return false;
+	if (strcmp(texturename, " ")) return false;
+	textureDictionary.insert(std::pair<GLchar*, Texture*>(texturename, texture));
+	return true;
 }
 
 Texture * ResourceManager::GetTexture(GLchar * texturename)
 {
-	return nullptr;
+#ifdef DEBUG
+	try
+	{
+#endif
+		return textureDictionary.at(texturename);
+#ifdef DEBUG
+	}
+	catch (std::out_of_range e)
+	{
+		return nullptr;
+	}
+#endif
 }
 
 void ResourceManager::RemoveTexture(GLchar * texturename)
 {
+	textureDictionary.erase(texturename);
 }
