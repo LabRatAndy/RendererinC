@@ -11,7 +11,7 @@ ResourceManager::~ResourceManager()
 		delete shaders->first;
 		delete shaders->second;
 	}
-	
+
 	for (std::map<GLchar*, Camera*>::iterator cameras = cameraDictionary.begin(); cameras != cameraDictionary.end(); ++cameras)
 	{
 		delete cameras->first;
