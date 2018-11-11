@@ -44,6 +44,7 @@ Shader * ResourceManager::GetShader(GLchar * shadername)
 
 void ResourceManager::RemoveShader(GLchar * shadername)
 {
+	delete GetShader(shadername);
 	shaderDictionary.erase(shadername);
 }
 
@@ -75,6 +76,7 @@ Camera * ResourceManager::GetCamera(GLchar * cameraname)
 
 void ResourceManager::RemoveCamera(GLchar * cameraname)
 {
+	delete GetCamera(cameraname);
 	cameraDictionary.erase(cameraname);
 }
 
@@ -106,5 +108,6 @@ Texture * ResourceManager::GetTexture(GLchar * texturename)
 
 void ResourceManager::RemoveTexture(GLchar * texturename)
 {
+	delete GetTexture(texturename);
 	textureDictionary.erase(texturename);
 }
