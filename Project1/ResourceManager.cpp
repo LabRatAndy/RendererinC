@@ -6,7 +6,22 @@ ResourceManager::ResourceManager()
 }
 ResourceManager::~ResourceManager()
 {
+	for (std::map<GLchar*, Shader*>::iterator shaders = shaderDictionary.begin(); shaders != shaderDictionary.end(); ++shaders)
+	{
+		delete shaders->first;
+		delete shaders->second;
+	}
 	
+	for (std::map<GLchar*, Camera*>::iterator cameras = cameraDictionary.begin(); cameras != cameraDictionary.end(); ++cameras)
+	{
+		delete cameras->first;
+		delete cameras->second;
+	}
+	for (std::map<GLchar*, Texture*>::iterator textures = textureDictionary.begin(); textures != textureDictionary.end(); ++textures)
+	{
+		delete textures->first;
+		delete textures->second;
+	}
 }
 ResourceManager & ResourceManager::Instance(void)
 {
